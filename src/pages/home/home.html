@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Crime Alert</ion-title>
+
+
+  </ion-navbar>
+  <ion-fab right top>
+
+  <a href="tel:999">
+    <button ion-fab color="secondary" small>
+
+        <ion-icon name="call"></ion-icon>
+
+    </button>
+    </a>
+
+  </ion-fab>
+</ion-header>
+
+<ion-content  >
+<!-- <ion-card> -->
+
+<div #map  id="map"></div>
+<hr>
+<!-- </ion-card> -->
+
+
+
+
+
+     <ion-list no-lines>
+
+
+      <!-- <ion-fab left bottom mini>
+      <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+
+    </ion-fab>
+
+         <!-- <form> -->
+
+            <ion-fab left  >
+                <button ion-fab  color="secondary" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+              </ion-fab>
+              <!-- recording -->
+               <ion-fab center  >
+                 <!-- <button ion-fab color="danger"><ion-icon name="mic"></ion-icon></button> -->
+                 <button ion-fab color="danger" (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon></button>
+                 <button ion-fab color="danger" (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon></button>
+
+                 <!-- <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+                 <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button> -->
+                </ion-fab>
+                <!-- end of recording -->
+
+                <ion-fab right  >
+                   <button ion-fab  color="primary"  (click)="takePhoto()"><ion-icon  name="camera"></ion-icon></button>
+                  </ion-fab>
+                   <!-- <button ion-fab><ion-icon  color="primary"  name="logo-vimeo"></ion-icon></button>
+                   <button ion-fab><ion-icon  color="primary"  name="logo-googleplus"></ion-icon></button> -->
+
+
+
+               <br>
+               <br>
+
+
+             <!-- <ion-item>
+
+                 <ion-label floating>Headline ( Title of crime briefly..)</ion-label>
+                 <ion-input  type="text" [(ngModel)]="headline"></ion-input>
+
+
+             </ion-item> -->
+
+             <!-- <ion-item *ngIf="slideTwoForm.controls.username.pending">
+                 <p>Checking username...</p>
+             </ion-item> -->
+
+             <!-- <ion-item *ngIf="!slideTwoForm.controls.username.valid && !slideTwoForm.controls.username.pending && (slideTwoForm.controls.username.dirty || submitAttempt)">
+                 <p>Sorry, that username can not be used!</p>
+             </ion-item> -->
+
+             <ion-item>
+                 <ion-label floating>Select Category</ion-label>
+                 
+                 <!-- <ion-select [(ngModel)]="category"> -->
+                    <ion-select [(ngModel)]="title">
+                     <ion-option value="Rape Case" checked="true">Rape</ion-option>
+                     <ion-option value="Domestic Violence">Domestic Violence</ion-option>
+                     <ion-option value="Child Abuse">Child Abuse</ion-option>
+                     <ion-option value="Murder">Murder</ion-option>
+
+                 </ion-select>
+             </ion-item>
+
+             <ion-item>
+                 <ion-label floating>What is happening?</ion-label>
+                 <!-- <ion-textarea [(ngModel)]="what" type="text" ></ion-textarea> -->
+                 <ion-textarea [(ngModel)]="description" type="text" ></ion-textarea>
+                 
+                 
+             </ion-item>
+
+         <!-- </form> -->
+
+
+
+
+
+     </ion-list>
+     <button ion-button color="secondary" full (click)="reprtCase()" (click)="presentToast()">REPORT CASE</button>
+
+
+
+
+
+
+
+
+
+
+  <div>
+    <!-- fetch photos -->
+    <div>
+      <ion-grid>
+   <ion-row>
+     <ion-col col-6 *ngFor="let photo of photos; let id = index">
+       <ion-card class="block">
+       <ion-icon  name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+
+       <img [src]="photo" *ngIf="photo" />
+       </ion-card>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+
+    </div>
+    <!-- end of fetch photos -->
+    <!-- <ion-fab left bottom mini>
+      <button ion-fab color="danger" (click)="startrecording()"><ion-icon name="logo-youtube"></ion-icon></button>
+
+    </ion-fab>
+
+    <ion-fab center bottom mini>
+      <button ion-fab color="danger" (click)="selectvideo()"><ion-icon name="play"></ion-icon></button>
+
+    </ion-fab>
+
+    <ion-fab right bottom mini>
+
+      <button ion-fab color="danger" (click)="takePhoto()"><ion-icon name="camera"></ion-icon></button>
+
+    </ion-fab>
+
+
+
+
+ -->
+  </div>
+
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+        <button ion-button primary (click)="startRecord()" *ngIf="!recording"><ion-icon name="mic"></ion-icon>&nbsp;&nbsp;Start Record</button>
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card> -->
+  <ion-list>
+    <ion-item *ngFor="let audio of audioList; index as i;">
+      <p>{{audio.filename}}</p>
+      <button ion-button clear item-end large (click)="playAudio(audio.filename, i)"><ion-icon name="play"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
